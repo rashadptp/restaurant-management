@@ -1,0 +1,104 @@
+<!-- resto/menu_list.html -->
+
+{% extends 'resto/base.html' %}
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+<div class="container mt-5">
+    <h1 class="text-center">Our Menu</h1>
+    <form method="get" action="{% url 'menu_search' %}" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <div class="row mt-4">
+        {% for section in sections %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                {% if section.image %}
+                <img src="{{ section.image.url }}" class="card-img-top" alt="{{ section.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title">{{ section.name }}</h2>
+                    <ul class="list-group list-group-flush">
+                        {% for item in section.menu_items.all %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ item.name }}</strong><br>
+                                <small>{{ item.description }}</small>
+                            </div>
+                            <div>
+                                ₹{{ item.price }}
+                                {% if item.is_available %}
+                                <span class="badge badge-success">Available</span>
+                                {% else %}
+                                <span class="badge badge-danger">Not Available</span>
+                                {% endif %}
+                                
+                            </div>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">No items available.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No sections available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+<style> 
+    /* static/css/styles.css */
+
+    body{
+        background-color: #36404c;
+        
+    }
+    .text-center{
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+    }
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+}
+
+.card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item strong {
+    font-size: 18px;
+}
+
+.list-group-item small {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+</style>
+{% endblock %}

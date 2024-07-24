@@ -1,0 +1,70 @@
+{% extends "resto/base.html" %}
+{% block title %}View Orders{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="small-container text-center mb-4">
+        <h2>View Orders</h2>
+    </div>
+    <ul class="list-group shadow-sm">
+        {% for order in orders %}
+        <li class="list-group-item d-flex justify-content-between align-items-center reservation-box">
+            <div>
+                <strong>Order ID:</strong> {{ order.id }}<br>
+                <strong>Items:</strong>
+                <ul>
+                    {% for order_item in order.order_items.all %}
+                        <li>{{ order_item.menu_item.name }} - Quantity: {{ order_item.quantity }} - Price: ₹{{ order_item.subtotal }}</li>
+                    {% endfor %}
+                </ul>
+                <strong>Customer:</strong> {{ order.customer.first_name }}<br>
+                <strong>Status:</strong> {% if order.status == 'P' %}Processing{% elif order.status == 'D' %}Delivered{% endif %}
+            </div>
+        </li>
+        {% empty %}
+            <li class="list-group-item">No orders available.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+    body {
+        background-image: url("{% static 'resto/images/vieworders.jpg' %}");
+    }
+
+    /* Custom styles for Orders pages */
+    .small-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.375rem;
+    }
+
+    h2 {
+        font-family: var(--bs-font-sans-serif);
+        color: #333;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .list-group-item {
+        margin-bottom: 0.75rem;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: #e9ecef;
+        transform: scale(1.02);
+    }
+
+    .reservation-box {
+        background-color: #fffbec;
+        border: 1px solid #ffc107;
+    }
+
+</style>
+
+{% endblock %}

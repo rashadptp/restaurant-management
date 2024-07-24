@@ -1,0 +1,149 @@
+{% extends "resto/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="recommendations-container">
+        <div class="banner">
+            <h1>Personalized Recommendations for {{ user.first_name }}</h1>
+        </div>
+        <div class="recommendations-content">
+            <div class="recommendation-text">
+                <p>Click to see your offer</p>
+                <div id="additional-info" class="additional-info" style="display: none;">
+                    <p><strong>{{ promotion }}</strong></p>
+                    <p>Connect to the counter for more details</p>
+                </div>
+            </div>
+            <div class="reveal-button-container">
+                <button id="revealButton" class="reveal-button">
+                    <img src="{% static 'resto/images/reveal.png' %}" alt="Finger Icon" class="finger-icon">
+                    <span>Reveal Your Offer</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body{
+            background-color: #000;
+        }
+        .recommendations-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #000;
+        }
+
+        .banner {
+            background: url('{% static 'resto/images/banner.jpg' %}') no-repeat center center;
+            background-size: cover;
+            padding: 4rem;
+            color: #fff;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .banner h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .recommendations-content {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: #333;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            background: #feead8;
+        }
+
+        .recommendation-text p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .additional-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #e2f0ff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #0056b3;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .reveal-button-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            
+        }
+
+        .reveal-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .reveal-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .finger-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+
+    <script>
+        document.getElementById('revealButton').addEventListener('click', function() {
+            var additionalInfo = document.getElementById('additional-info');
+            if (additionalInfo.style.display === 'none') {
+                additionalInfo.style.display = 'block';
+                this.innerHTML = '<img src="{% static 'resto/images/reveal.png' %}" alt="Reveal Icon" class="finger-icon"> <span>Hide Details</span>';
+            } else {
+                additionalInfo.style.display = 'none';
+                this.innerHTML = '<img src="{% static 'resto/images/reveal.png' %}" alt="Finger Icon" class="finger-icon"> <span>Reveal Your Offer</span>';
+            }
+        });
+    </script>
+{% endblock %}

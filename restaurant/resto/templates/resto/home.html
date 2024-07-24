@@ -1,0 +1,208 @@
+{% extends "resto/base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+    body{
+        background-color: #343a40;
+        
+    }
+    .background-video-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .background-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -1;
+    }
+
+    .content-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 1;
+    }
+    
+    .content-overlay h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 4em;
+        font-weight: 700;
+        color: #f1c40f; /* Gold color */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    
+    .content-overlay p {
+        font-family:'Lobster', cursive;
+        font-size: 1.5em;
+        color: #ffffff; /* Light grey */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .content-overlay a.btn {
+        margin-top: 20px;
+        font-size: 1.2em;
+        padding: 10px 20px;
+        background-color: #e74c3c; /* Red */
+        border: none;
+        color: white;
+        text-shadow: none;
+    }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 3em;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        vertical-align: middle;
+    }
+    .small-container{
+        color: #fff
+    }
+    .about-us {
+        background-color: #fff;
+        color: #333;
+        padding: 4em 0;
+        text-align: center;
+    }
+
+    .about-us h2 {
+        font-size: 3em;
+        font-weight: 700;
+        margin-bottom: 1em;
+    }
+
+    .about-us p {
+        font-size: 1.5em;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .special-offers {
+        background-color: #feead8;
+        color: #333;
+        padding: 4em 0;
+        text-align: center;
+    }
+
+    .special-offers h2 {
+        font-size: 3em;
+        font-weight: 700;
+        margin-bottom: 1em;
+    }
+
+    .contact-info {
+        background-color: #333;
+        color: #fff;
+        padding: 4em 0;
+        text-align: center;
+    }
+
+    .contact-info h2 {
+        font-size: 3em;
+        font-weight: 700;
+        margin-bottom: 1em;
+    }
+
+    .contact-info p {
+        font-size: 1.5em;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .small{
+        color: #fff;
+        font-family:'Lobster', cursive;
+        font-size: 1.2em;
+        margin-bottom: 1em;
+        text-decoration: bold;
+        cursor: pointer;
+    }
+    
+</style>
+
+<div class="background-video-container">
+    <video class="background-video" autoplay muted loop>
+        <source src="{% static 'resto/videos/restauranthome1.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content-overlay">
+        <h1>Welcome to <br>CraveHouse</h1>
+        <p>Welcome to the best restaurant in town!</p>
+        {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}?next={% url 'reserve_table' %}" class="btn btn-primary">Reserve a Table !!</a>
+        {% endif %}
+    </div>
+</div>
+<div class="about-us">
+    <div class="container">
+        <h2>About Us</h2>
+        <p>Discover the story behind CraveHouse, where passion meets culinary excellence. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat semper risus, non interdum nulla ultricies sed. Etiam auctor nec eros at venenatis.</p>
+    </div>
+</div>
+
+<div class="special-offers">
+    <div class="container">
+        <h2>Special Offers and Gifts</h2>
+        <p>Explore our latest offers and seasonal menus crafted by our talented chefs.We have launched our new scheme of free gifts on every 5th order or equivalent coin scheme.
+            Contact for more details.
+        </p>
+    </div>
+</div>
+
+<div class="gallery" id="gallery">
+    <div class="container">
+        <div class='small'> <h2>Explore Our Gallery</h2> </div>
+        <div class="gallery-item">
+            <img src="{% static 'resto/images/gallery11.jpg' %}" alt="Gallery Image 1">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'resto/images/gallery22.jpg' %}" alt="Gallery Image 2">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'resto/images/gallery33.jpg' %}" alt="Gallery Image 3">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'resto/images/gallery44.jpg' %}" alt="Gallery Image 4">
+        </div>
+    </div>
+</div>
+
+<div class="contact-info">
+    <div class="container">
+        <h2>Contact Information</h2>
+        <p>Get in touch with us to Reserve a table or Inquire about our services. we wish you a good experience!!</p>
+        <p>Phone: +91 999 597 3854<br>Email: info@cravehouse.com<br>Address: Gujarati Street, Calicut, India</p>
+    </div>
+</div>
+
+
+{% endblock %}

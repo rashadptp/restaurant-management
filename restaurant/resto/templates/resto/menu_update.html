@@ -1,0 +1,54 @@
+{% extends 'resto/base.html' %}
+{% load static %}
+
+{% block title %}Update Menu Item{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Update Menu Item</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ menu_item.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" required>{{ menu_item.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" class="form-control" value="{{ menu_item.price }}" required>
+        </div>
+        <div class="form-group">
+            <label for="section">Section</label>
+            <select id="section" name="section" class="form-control" required>
+                {% for section in sections %}
+                    <option value="{{ section.id }}" {% if section.id == menu_item.section.id %}selected{% endif %}>{{ section.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="is_available">Available</label>
+            <input type="checkbox" id="is_available" name="is_available" {% if menu_item.is_available %}checked{% endif %}>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Item</button>
+    </form>
+</div>
+
+<style>
+    .container {
+        margin-top: 50px;
+        max-width: 600px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+</style>
+{% endblock %}

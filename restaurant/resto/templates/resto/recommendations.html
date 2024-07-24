@@ -1,0 +1,86 @@
+{% extends "resto/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="small-container text-center mb-4">
+        <h2>Recommended Items</h2>
+    </div>
+    <div class="row">
+        {% for item in recommendations %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="card-text">Price: ₹{{ item.price }}</p>
+                    <p class="card-text">Section:{{item.section}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Navigation Button to Place Order -->
+    <div class="text-center mt-4">
+        <a href="{% url 'place_order' %}" class="btn btn-primary">Back to Place Order</a>
+    </div>
+</div>
+
+    <style>
+        .small-container{
+            color: #fff
+        }
+        body {
+            background-image: url("{% static 'resto/images/staff_background.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    
+        .card {
+            border: none; /* Remove default card border */
+            border-radius: 10px;
+            overflow: hidden; /* Ensure rounded corners */
+            transition: transform 0.2s ease-in-out;
+            background-color:#feead8 /* Smooth transition on hover */
+        }
+    
+        .card:hover {
+            transform: translateY(-5px); /* Lift card slightly on hover */
+        }
+    
+        .card-body {
+            padding: 1.5rem;
+        }
+    
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+    
+        .card-text {
+            font-size: 1rem;
+            color: #666;
+        }
+    
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+
+{% endblock %}
+

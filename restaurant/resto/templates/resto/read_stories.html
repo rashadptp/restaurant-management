@@ -1,0 +1,119 @@
+{% extends 'resto/base.html' %}
+{% load static %}
+
+{% block title %}Read Stories{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+<div class="container mt-5 p-5 bg-light rounded shadow-lg">
+    <a href="{% url 'customer_dashboard' %}" class="btn btn-secondary mb-4">Back to Home</a>
+    <h1 class="text-center mb-4">Your Order is Placed Successfully!! <br> While you wait, enjoy some reading!!</h1>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'resto/images/story11.jpg' %}" alt="Story 1">
+                <div class="card-body">
+                    <h5 class="card-title">Jolly Good Food by Allegra McEvedy</h5>
+                    <p class="card-text">Lashings of ginger beer and delicious food for every time of day in an...</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'resto/images/story22.jpg' %}" alt="Story 2">
+                <div class="card-body">
+                    <h5 class="card-title">Rich Dad Poor Dad</h5>
+                    <p class="card-text">What the Rich Teach Their Kids About Money...</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'resto/images/story33.jpg' %}" alt="Story 3">
+                <div class="card-body">
+                    <h5 class="card-title">Spiderman</h5>
+                    <p class="card-text">Comic stories of Spiderman...</p>
+                    <a href="https://manybooks.net/book/123109/read#epubcfi(/6/2[item4]!/4/24[pgepubid00005]/1:0)" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-image: url("{%static 'resto/images/read.jpg'%}");
+        {% comment %} background: linear-gradient(to right, #2c3e50, #bdc3c7); {% endcomment %}
+        color: #fff;
+        font-family: 'Arial', sans-serif;
+
+    }
+
+    .container {
+        background-color: #36404c;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #fff;
+    }
+    
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .bg-light {
+        background-color: #36404c !important;
+        color: #fff;
+    }
+    .text-center{
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    .card-text {
+        font-family: 'Oswald', sans-serif;
+        color: #555;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #7f8c8d;
+    }
+
+    h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2rem;
+        color: #333;
+    }
+</style>
+{% endblock %}

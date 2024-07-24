@@ -1,0 +1,213 @@
+{% extends 'resto/base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container-fluid mt-5">
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+            <div class="position-sticky" style="top: 60px;"> <!-- Adjust top padding as needed -->
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.GET.view == 'revenue' %}active{% endif %}" href="?view=revenue">
+                            <i class="fas fa-dollar-sign"></i> Total Revenue
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.GET.view == 'menu_management' %}active{% endif %}" href="?view=menu_management">
+                            <i class="fas fa-utensils"></i> Menu Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.GET.view == 'manage_tables' %}active{% endif %}" href="?view=manage_tables">
+                            <i class="fas fa-table"></i> Manage Tables
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.GET.view == 'orders' %}active{% endif %}" href="?view=orders">
+                            <i class="fas fa-receipt"></i> Orders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.GET.view == 'reservations' %}active{% endif %}" href="?view=reservations">
+                            <i class="fas fa-calendar-check"></i> Reservations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.GET.view == 'prediction' %}active{% endif %}" href="?view=prediction">
+                            <i class="fas fa-chart-line"></i> Inventory Prediction
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style="padding-top: 60px;"> <!-- Adjust padding-top as needed -->
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Admin Dashboard</h1>
+            </div>
+            <div id="content-area" class="content">
+                {% if request.GET.view == 'revenue' %}
+                    <h2>Total Revenue</h2>
+                     <div class="card-body text-center">
+                        <h5 class="card-title"><a href="{% url 'admin_revenue' %}" class="btn btn-link">View Total Revenue</a></h5>
+                        {% comment %} <p>Total Revenue from all Delivered Orders: ₹{{ total_revenue }}</p>   {% endcomment %}
+                    </div>
+                {% elif request.GET.view == 'menu_management' %}
+                <div class="management-section">
+                    <h3>Menu Management</h3>
+                    <ul>
+                        <li><a href="{% url 'menu_item_add' %}">Add Menu Item</a></li>
+                        <li><a href="{% url 'admin_menu' %}">Update/Delete Menu Items</a></li>
+                    </ul>
+                </div>
+            {% elif request.GET.view == 'manage_tables' %}
+                <div class="management-section">
+                    <h3>Manage Tables</h3>
+                    <ul>
+                        <li><a href="{% url 'add_table' %}">Add Table</a></li>
+                        <li><a href="{% url 'table_list' %}">View Tables</a></li>
+                    </ul>
+                </div>
+                {% elif request.GET.view == 'orders' %}
+                    <h2>Orders</h2>
+                    <ul class="list-group">
+                        {% for order in orders %}
+                            <li class="list-group-item">
+                                <strong>Order ID:</strong> {{ order.id }}<br>
+                                <strong>Items:</strong>
+                                <ul>
+                                    {% for order_item in order.order_items.all %}
+                                        <li>{{ order_item.menu_item.name }} - Quantity: {{ order_item.quantity }} - Price: ₹{{ order_item.subtotal }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <strong>Customer:</strong> {{ order.customer }}<br>
+                                <strong>Status:</strong> {% if order.status == 'P' %}Processing{% elif order.status == 'D' %}Delivered{% endif %}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No orders available.</li>
+                        {% endfor %}
+                    </ul>
+                {% elif request.GET.view == 'reservations' %}
+                    <h2>Reservations</h2>
+                    <ul class="list-group">
+                        {% for reservation in reservations %}
+                            <li class="list-group-item">
+                                <div style="display: flex; justify-content: space-between;">
+                                <div>
+                                {{ reservation.customer.first_name }} - Table {{ reservation.table.number }} - 
+                                {{ reservation.reservation_date }} - 
+                                {{ reservation.reservation_start_time }} to {{ reservation.reservation_end_time }}
+                                </div>
+                                <div>
+                                    <form method="post" action="{% url 'cancel_reservation_admin' %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="reservation_id" value="{{ reservation.id }}">
+                                        <button class="btn btn-outline-danger btn-sm" type="submit">Cancel</button>
+                                    </form>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No reservations available.</li>
+                        {% endfor %}
+                    </ul>
+                {% elif request.GET.view == 'prediction'%}
+                <h3>Inventory Prediction</h3>
+                <ul>
+                <a href="{% url 'predict' %}" class="btn btn-primary btn-lg">Check Prediction</a>
+                {% else %}
+                    <h2>Welcome to the Admin Dashboard</h2>
+                    <p>Select an option from the sidebar to get started.</p>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</div>
+
+<style>
+    body {
+        background-image: url("{% static 'resto/images/admin_backgroundd.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #000000;
+    }
+    .sidebar {
+        height: calc(100vh - 60px); /* Adjust height based on navbar height */
+        position: fixed;
+        top: 75px; /* Adjust top position to move below navbar */
+        left: 0;
+        z-index: 1000;
+    }
+    .sidebar .nav-link {
+        font-weight: 500;
+        color: #FFFFFF;
+    }
+    .sidebar .nav-link .fas {
+        margin-right: 4px;
+    }
+    .sidebar .nav-link:hover {
+        background-color: #343a40;
+    }
+    .sidebar .nav-link.active {
+        background-color: #007bff;
+        color: white;
+    }
+    .content {
+        margin-left: 220px; /* Width of the sidebar */
+        padding-top: 15px; /* Adjust top padding for content */
+    }
+    .h2 {
+        font-family: 'Arial', sans-serif;
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+    }
+    .list-group-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        
+    }
+    .management-section {
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .management-section h3 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .management-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .management-section ul li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .management-section ul li:last-child {
+        border-bottom: none;
+    }
+    .management-section ul li a {
+        text-decoration: none;
+        color: #343a40;
+    }
+    .management-section ul li a:hover {
+        color: #007bff;
+    }
+</style>
+{% endblock %}

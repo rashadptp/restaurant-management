@@ -1,0 +1,31 @@
+{% extends "resto/base.html" %}
+{% load static %}
+
+{% block title %}Staff Dashboard{% endblock %}
+
+{% block content %}
+<div class="background-images">
+<div class="dashboard-container" style="background-image: url('{% static 'resto/images/staff_background.jpg' %}');">
+    <div class="container text-center text-white">
+        <h1>Welcome, Staff Member!</h1>
+        <div class="mt-4">
+            <a href="{% url 'active_orders' %}" class="btn btn-primary btn-lg mb-3">View Active Orders</a><br>
+            <a href="{% url 'view_orders' %}" class="btn btn-primary btn-lg">View Orders</a>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    
+    .dashboard-container {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        color: #000000;
+    }
+    
+     </style>
+{% endblock %}

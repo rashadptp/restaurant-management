@@ -1,0 +1,15 @@
+<!-- profile.html -->
+{% extends "resto/base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Profile</h2>
+    <ul>
+        <li><strong>Name:</strong> {{ user.get_full_name }}</li>
+        <li><strong>Email:</strong> {{ user.email }}</li>
+        {% comment %} <li><strong>Phone Number:</strong> {{ user.profile.phone_number }}</li> <!-- Replace with your actual profile model field --> {% endcomment %}
+        <!-- Add other profile details as needed -->
+    </ul>
+</div>
+{% endblock %}

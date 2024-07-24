@@ -1,0 +1,50 @@
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 300px; /* Adjust width as needed */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other content */
+    transition: width 0.3s ease-in-out; /* Smooth width transition */
+}
+
+.chat-button {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1001; /* Ensure it's above chat-widget */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.chat-container {
+    max-height: 300px; /* Adjust max height as needed */
+    overflow-y: auto;
+}
+
+#user-input {
+    width: calc(100% - 80px); /* Adjust width to accommodate button */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+button {
+    width: 60px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}

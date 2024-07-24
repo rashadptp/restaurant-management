@@ -1,0 +1,18 @@
+{% extends 'resto/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Update Order Status</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" class="form-control" required>
+                <option value="P" {% if order.status == 'P' %}selected{% endif %}>Processing</option>
+                <option value="D" {% if order.status == 'D' %}selected{% endif %}>Delivered</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!-- resto/templates/resto/prediction_result.html -->
+
+{% extends "resto/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-white">
+            <h2 class="display-4">📊 Prediction Result</h2>
+        </div>
+        <div class="card-body text-center">
+            <p class="lead">
+                Predicted quantity for <strong>{{ menu_item }}</strong>:
+            </p>
+            <h3 class="display-3">{{ prediction }}</h3>
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-primary btn-lg">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .card {
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px #000000;
+    }
+
+    .card-body {
+        font-size: 1.25rem;
+        color: #343a40;
+        margin-bottom: 1rem;
+        font-family: 'Lobster', cursive;
+    }
+
+    .btn-primary {
+        background-color: #0056b3;
+        border-color: #004085;
+        font-size: 1.2rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+        background-color: #004085;
+        border-color: #003d7a;
+    }
+</style>
+{% endblock %}

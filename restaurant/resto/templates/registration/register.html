@@ -1,0 +1,29 @@
+{% extends 'resto/base.html' %}
+
+{% block content %}
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password_confirm">Confirm Password:</label>
+            <input type="password" id="password_confirm" name="password_confirm" required class="form-control">
+        </div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</body>
+{% endblock %}

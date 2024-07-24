@@ -1,0 +1,30 @@
+{% extends "resto/base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome, {{ user.username }}!</h1>
+    
+    {% if is_customer %}
+        <h2>Customer Dashboard</h2>
+        <p>Here's your customer-specific content.</p>
+        <!-- Example: Customer specific actions -->
+        <a href="{% url 'view_tables' %}">View Tables</a>
+        <a href="{% url 'place_order' %}">Place Order</a>
+        <a href="{% url 'reserve_table' %}">Reserve Table</a>
+    {% elif is_staff %}
+        <h2>Staff Dashboard</h2>
+        <p>Here's your staff-specific content.</p>
+        <!-- Example: Staff specific actions -->
+        <a href="{% url 'view_orders' %}">View Orders</a>
+        <!-- Additional staff-specific actions -->
+    {% elif is_admin %}
+        <h2>Admin Dashboard</h2>
+        <p>Here's your admin-specific content.</p>
+        <!-- Example: Admin specific actions -->
+        <a href="{% url 'admin_view_orders' %}">View All Orders</a>
+        <a href="{% url 'admin_view_reservations' %}">View All Reservations</a>
+        <!-- Additional admin-specific actions -->
+    {% endif %}
+</div>
+{% endblock %}

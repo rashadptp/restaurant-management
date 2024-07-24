@@ -1,0 +1,60 @@
+{% extends 'resto/base.html' %}
+
+{% block title %}View Tables{% endblock %}
+{%load static%}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Tables Available</h1>
+
+    <div class="row">
+        {% for table in tables %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{% static 'resto/images/table.jpg' %}" class="card-img-top" alt="Table Image">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Table {{ table.number }}</h5>
+                    <p class="card-text">Seats: {{ table.seats }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No tables available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .card {
+        border: none;
+        transition: transform 0.3s ease-in-out;
+    }
+    .card:hover {
+        transform: scale(1.03);
+    }
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .card-text {
+        font-size: 18px;
+    }
+</style>
+{% endblock %}

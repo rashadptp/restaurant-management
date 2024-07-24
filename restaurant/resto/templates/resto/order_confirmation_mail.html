@@ -1,0 +1,16 @@
+<!-- reservation_confirmation_email.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Confirmation</title>
+</head>
+<body>
+    <h2>Reservation Confirmation</h2>
+    <p>Dear {{ customer_name }},</p>
+    <p>Your Order for  on {% for order_item in order.order_items.all %}
+        <li>{{ order_item.menu_item.name }} - Quantity: {{ order_item.quantity }}</li> has been confirmed.</p>
+    <p>Thank you for choosing us!</p>
+</body>
+</html>

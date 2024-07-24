@@ -1,0 +1,84 @@
+{% extends "resto/base.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading text-black">Contact Us</h2>
+                <hr class="light my-4">
+                <p class="text-faded mb-5">Send Us a Message!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-xl">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="section-heading">Our Location</h2>
+                <p>Gujarati Street, Calicut, India</p>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="section-heading">Contact Info</h2>
+                <p>Email: contactus@cravehouse.com</p>
+                <p>Phone: +91 898 545 2211</p>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    body{
+        background-color: #36404c;
+        
+    }
+    .contact-section {
+        background-image: url("{% static 'resto/images/contactbgg.jpg' %}");
+        background-position: center;
+        background-size: cover;
+        padding: 100px 0;
+        color: white;
+    }
+    .section-heading {
+        font-size: 3em;
+        color: black;
+    }
+    .text-faded {
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        
+    }
+    .text-center {
+        font-family: 'Oswald', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block extracss %}
+
+{% endblock %}
