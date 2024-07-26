@@ -61,8 +61,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'rashadbackup11@gmail.com'
-EMAIL_HOST_PASSWORD = 'fxiq uzms gtlp piho'
+EMAIL_HOST_USER = '***********'
+EMAIL_HOST_PASSWORD = '******************'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
@@ -115,7 +115,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'restaurant_db',
         'USER': 'postgres',
-        'PASSWORD': 'rashad123',
+        'PASSWORD': '******',
         'HOST': 'localhost',   # Or your PostgreSQL host
         'PORT': '5432',        # Or your PostgreSQL port
     }
