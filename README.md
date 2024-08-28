@@ -1,6 +1,11 @@
 # Restaurant Management System
 ## Project Overview
 The Restaurant Management System is a comprehensive web application designed to streamline the operations of a restaurant. The system allows customers to place orders, reserve tables, and manage their dining experience, while administrators can oversee orders, manage menus, and track revenue. The project is built using Django, a high-level Python web framework, and follows a modular and scalable architecture to ensure efficiency and ease of use.
+![image](https://github.com/user-attachments/assets/2e7c5c16-0de4-4815-8e49-7a2d46bcaeff)
+![image](https://github.com/user-attachments/assets/37c3efcc-c1e9-4f10-8f04-746ac1d74afc)
+![image](https://github.com/user-attachments/assets/58fb103d-adf4-4ad5-81ed-b34b8ce50325)
+![image](https://github.com/user-attachments/assets/3d57e940-456e-4800-a6d1-672203fca9de)
+
 
 ## Features
 ## Customer Dashboard
@@ -38,6 +43,8 @@ Technologies Used
 Bootstrap: For responsive and modern UI components.
 POSTGRE SQL: Database management for storing all data.
 Git/GitHub: Version control and collaboration.
+
+
 ## Installation
 To run this project locally:
 
